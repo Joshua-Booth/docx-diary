@@ -295,7 +295,7 @@ def check_file(data_file):
     """
     if is_file(data_file):
         with open(data_file, 'r') as file:
-            doc = docx.Document(data_file)
+            doc = docx.Document(file)
             counter = 0
             for para in doc.paragraphs:
                 if para.text == "":
@@ -327,7 +327,7 @@ def get_date_data(file):
                    "period" (str)
     """
     try:
-        with open(file, 'r') as f:
+        with open(file, 'r') as file:
             date = get_data(file)[0].split(' ')
             return {
                 'day_of_week': date[0].strip(','),
@@ -339,9 +339,6 @@ def get_date_data(file):
             }
     except FileNotFoundError:
         logger.error("File '{}' not found.".format(file))
-    else:
-        logger.error("Failed to get date data.")
-        return None
 
 
 if __name__ == '__main__':
