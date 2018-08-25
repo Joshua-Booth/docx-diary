@@ -40,10 +40,8 @@ def main():
     """ Start of the program. """
     if not check_directory('data'):
         print("No data folder was found.")
-    else:
-        pass
-    parser_decription = "View, create and change data from a text file."
-    parser = argparse.ArgumentParser(description=parser_decription)
+    parser_description = "View, create and change data from a text file."
+    parser = argparse.ArgumentParser(description=parser_description)
     group = parser.add_mutually_exclusive_group()
     parser.add_argument("-d", "--date", action="store", nargs=3, type=int,
                         metavar=("DAY", "MONTH", "YEAR"),
@@ -154,7 +152,6 @@ def get_data(filename):
         return full_data
     except Exception as e:
         logger.error(e)
-        return None
 
 
 def get_filename(date):
@@ -188,7 +185,7 @@ def view_data(date):
     try:
         if check_file(file_name) is not False:
             data = get_data(file_name)
-        with open(file_name, 'r') as file:
+        with open(file_name, 'r'):
             day_of_week = get_date_data(file_name)['day_of_week']
             month = get_date_data(file_name)['month']
             day = get_date_data(file_name)['day']
@@ -262,7 +259,7 @@ def edit_data(date):
         file_name = get_filename(date)
         os.startfile("{}\{}".format(os.getcwd(), file_name))
     except FileNotFoundError:
-        logger.error("File '{}' could not be found.".format(file_name))
+        logger.error("File could not be found: {}".format(get_filename(date)))
         date = "{}/{}/{}".format(date['day'], date['month'], date['year'])
         print("There is no data you can edit for the date '{}'.".format(date))
 
@@ -310,11 +307,11 @@ def check_file(data_file):
         return False
 
 
-def get_date_data(file):
+def get_date_data(file_name):
     """
     Returns a dictionary of date information in the given file.
 
-    :param str file: The file to get the date from.
+    :param str file_name: The file to get the date from.
     :returns dict or None: (dict) or (None)
              keys: "day_of_week" (str)
                    "month" (str)
@@ -324,8 +321,8 @@ def get_date_data(file):
                    "period" (str)
     """
     try:
-        with open(file, 'r') as file:
-            date = get_data(file)[0].split(' ')
+        with open(file_name, 'r'):
+            date = get_data(file_name)[0].split(' ')
             return {
                 'day_of_week': date[0].strip(','),
                 'month': date[1].strip(','),
@@ -335,7 +332,7 @@ def get_date_data(file):
                 'period': date[5][0:2]
             }
     except FileNotFoundError:
-        logger.error("File '{}' not found.".format(file))
+        logger.error("File '{}' not found.".format(file_name))
 
 
 if __name__ == '__main__':
