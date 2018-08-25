@@ -37,11 +37,7 @@ logger.disabled = True
 
 
 def main():
-    """
-    Start the program.
-
-    :return None: (None)
-    """
+    """ Start of the program. """
     if not check_directory('data'):
         print("No data folder was found.")
     else:
@@ -96,8 +92,8 @@ def is_file(file):
     """
     Check if a file is an openable word document (.docx).
 
-    :param file: (str)
-    :return True/False: (Bool)
+    :param str file: The file to check.
+    :return bool True | False:
     """
     return True if get_data(file) is not None else False
 
@@ -106,7 +102,7 @@ def get_current_date():
     """
     Return the current date in a dict format.
 
-    :returns: (dict)
+    :returns dict:
                keys: "year" (int)
                      "month" (int)
                      "month_name" (str)
@@ -147,8 +143,8 @@ def get_data(filename):
     """
     Return all the data from a file with the given filename.
 
-    :param filename: (str)
-    :returns full_data or None: (str) or (None)
+    :param str filename: The name of the file in which to get data.
+    :returns str full_data | None: Gets the data or else nothing.
     """
     try:
         doc = docx.Document(filename)
@@ -165,8 +161,8 @@ def get_filename(date):
     """
     Get the filename from a given date.
 
-    :param date: (dict)
-    :return: (None)
+    :param dict date: The data that will be used to get the filename.
+    :return None:
     """
     for item in date:
         try:
@@ -185,8 +181,8 @@ def view_data(date):
     """
     Displays the data from a given date.
 
-    :param date: (dict)
-    :return: (None)
+    :param dict date:
+    :return None:
     """
     file_name = get_filename(date)
     try:
@@ -223,7 +219,7 @@ def new_data():
     """
     Create a new data entry for the current date and time.
 
-    :return: (None)
+    :return None:
     """
     year = get_current_date()["year"]
     month_name = get_current_date()["month_name"]
@@ -270,12 +266,13 @@ def edit_data(date):
         date = "{}/{}/{}".format(date['day'], date['month'], date['year'])
         print("There is no data you can edit for the date '{}'.".format(date))
 
+
 def check_directory(directory):
     """
     Checks the contents of the directory are in a valid format.
 
-    :param directory: (str)
-    :returns True or None: (Bool) or (None)
+    :param str directory: The directory to check is valid.
+    :returns bool True | None:
     """
     try:
         os.chdir(directory)
@@ -290,8 +287,8 @@ def check_file(data_file):
     Checks a given file to see if it is in a valid format by having at least 2
     lines in the file.
 
-    :param data_file: (str)
-    :return True/False: (Bool)
+    :param str data_file: The data file to check is valid.
+    :return bool True | False:
     """
     if is_file(data_file):
         with open(data_file, 'r') as file:
@@ -317,7 +314,7 @@ def get_date_data(file):
     """
     Returns a dictionary of date information in the given file.
 
-    :param file (str):
+    :param str file: The file to get the date from.
     :returns dict or None: (dict) or (None)
              keys: "day_of_week" (str)
                    "month" (str)
