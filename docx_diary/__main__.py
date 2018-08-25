@@ -1,5 +1,5 @@
 # ===================================
-# Filename: main.py
+# Filename: __main__.py
 # Purpose: To setup and start the docx-diary program.
 #
 #
@@ -26,7 +26,7 @@
 # Email: joshb00th@icloud.com
 # ===================================
 
-from docx_diary._logger_ import logger
+from docx_diary._logger import logger
 import os
 import datetime
 import argparse

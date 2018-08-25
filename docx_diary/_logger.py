@@ -1,5 +1,5 @@
 # ===================================
-# Filename: _logger_.py
+# Filename: _logger.py
 # Purpose: To log data to a log file as part of the docx-diary program.
 #
 #
