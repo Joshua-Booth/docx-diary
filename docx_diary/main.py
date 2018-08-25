@@ -26,7 +26,12 @@
 # Email: joshb00th@icloud.com
 # ===================================
 
-from __init__ import *
+from docx_diary._logger_ import logger
+import os
+import datetime
+import argparse
+import docx
+from docx.shared import Pt
 
 logger.disabled = True
 
@@ -38,9 +43,9 @@ def main():
     :return None: (None)
     """
     if not check_directory('data'):
-		print("No data folder was found.")
-	else:
-		pass
+        print("No data folder was found.")
+    else:
+        pass
     parser_decription = "View, create and change data from a text file."
     parser = argparse.ArgumentParser(description=parser_decription)
     group = parser.add_mutually_exclusive_group()
