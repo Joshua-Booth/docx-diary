@@ -23,10 +23,13 @@ python-docx 0.8.6+
 ```
 Monday January 1 2018
 ```
+
 **File data is in the following format:**
 
+```
 {Day}, {Month} {Day Number}, {Year} {Time} {Period}
 {Message}
+```
 
 *Example:*
 ```
