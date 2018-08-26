@@ -26,7 +26,7 @@
 # Email: joshb00th@icloud.com
 # ===================================
 
-from docx_diary._logger import logger
+from _logger import logger
 import os
 import datetime
 import argparse
@@ -288,8 +288,8 @@ def check_file(data_file):
     :return bool True | False:
     """
     if is_file(data_file):
-        with open(data_file, 'r') as file:
-            doc = docx.Document(file)
+        with open(data_file, 'r'):
+            doc = docx.Document(data_file)
             counter = 0
             for para in doc.paragraphs:
                 if para.text == "":
@@ -297,10 +297,8 @@ def check_file(data_file):
                 counter += 1
             if counter == 1:
                 logger.error("No message to read from.")
-                return None
             elif counter < 1:
                 logger.error("No date or message to read from.")
-                return None
             else:
                 return True
     else:
