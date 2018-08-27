@@ -38,7 +38,7 @@ logger.disabled = True
 
 def main():
     """ Start of the program. """
-    if not check_directory('data'):
+    if not check_change_directory('data'):
         print("No data folder was found.")
     parser_description = "View, create and change data from a text file."
     parser = argparse.ArgumentParser(description=parser_description)
@@ -264,9 +264,10 @@ def edit_data(date):
         print("There is no data you can edit for the date '{}'.".format(date))
 
 
-def check_directory(directory):
+def check_change_directory(directory):
     """
-    Checks the contents of the directory are in a valid format.
+    Checks if the directory can be changed to by trying to change the directory
+    to the given directory name.
 
     :param str directory: The directory to check is valid.
     :returns bool True | None:
