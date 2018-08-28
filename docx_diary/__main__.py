@@ -38,8 +38,8 @@ logger.disabled = False
 
 def main():
     """ Start of the program. """
-    if not check_change_directory('data'):
-        print("No data folder was found.")
+    if not check_change_directory('diary'):
+        print("Checking current folder as no diary folder was found...")
     parser_description = "View, create and change data from a text file."
     parser = argparse.ArgumentParser(description=parser_description)
     group = parser.add_mutually_exclusive_group()
@@ -60,24 +60,20 @@ def main():
                                               get_current_date()["day"],
                                               get_current_date()["year"])
         if is_file(file_name):
-            print("Do you want to overwrite your current message? (yes/no)")
+            print("Do you want to overwrite your current message? (y/n)")
             overwrite = input(">> ")
-            if overwrite.lower() == "yes":
+            if overwrite.lower() == "y":
                 new_data()
         else:
             new_data()
     # View data from a date
     elif args.date is not None:
-        day = args.date[0]
-        month = args.date[1]
-        year = args.date[2]
+        day, month, year = args.date
         date_format = {'day': day, 'month': month, 'year': year}
         view_data(date_format)
     # Edit a data entry
     elif args.edit is not None:
-        day = args.edit[0]
-        month = args.edit[1]
-        year = args.edit[2]
+        day, month, year = args.edit
         date_format = {'day': day, 'month': month, 'year': year}
         edit_data(date_format)
     else:
