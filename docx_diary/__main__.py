@@ -33,7 +33,7 @@ import argparse
 import docx
 from docx.shared import Pt
 
-logger.disabled = True
+logger.disabled = False
 
 
 def main():
@@ -218,13 +218,8 @@ def new_data():
 
     :return None:
     """
-    year = get_current_date()["year"]
-    month_name = get_current_date()["month_name"]
-    day = get_current_date()["day"]
-    day_name = get_current_date()["day_name"]
-    hour = get_current_date()["hour"]
-    minute = get_current_date()["minute"]
-    period = get_current_date()["period"]
+    current_date = list(value for value in get_current_date().values())
+    year, month, month_name, day, day_name, hour, minute, period = current_date
 
     file_time = "{}:{}".format(hour, minute)
     file_name = "{} {} {} {}.docx".format(day_name, month_name, day, year)
@@ -236,7 +231,7 @@ def new_data():
     font.name = "Calibri"
     font.size = Pt(11)
 
-    with open(file_name, 'w') as file:
+    with open(file_name, 'w'):
         message = input("Date: {}\nEnter your message: ".format(file_date))
 
         date = document.add_paragraph()
