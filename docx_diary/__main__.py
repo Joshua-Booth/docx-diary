@@ -203,27 +203,29 @@ def new_data():
     """
     current_date = list(value for value in get_current_date().values())
     year, month, month_name, day, day_name, hour, minute, period = current_date
+    file_extension = "docx"
 
-    file_time = "{}:{}".format(hour, minute)
-    file_name = "{} {} {} {}.docx".format(day_name, month_name, day, year)
+    file_time = "{0}:{1:02d}".format(hour, minute)
+    file_name = "{} {} {} {}.{}".format(day_name, month_name, day, year,
+                                        file_extension)
     file_date = "{}, {} {}, {}".format(day_name, month_name, day, year)
 
+    # Default Style
     document = docx.Document()
     style = document.styles['Normal']
     font = style.font
     font.name = "Calibri"
     font.size = Pt(11)
 
-    with open(file_name, 'w'):
-        message = input("Date: {}\nEnter your message: ".format(file_date))
+    message = input("Date: {}\nEnter your message: ".format(file_date))
 
-        date = document.add_paragraph()
-        date.style = document.styles['Normal']
-        data = document.add_paragraph()
-        data.style = document.styles['Normal']
-        date.add_run("{} {} {}".format(file_date, file_time, period))
-        data.add_run(message)
-        document.save(file_name)
+    date = document.add_paragraph()
+    date.style = document.styles['Normal']
+    data = document.add_paragraph()
+    data.style = document.styles['Normal']
+    date.add_run("{} {} {}".format(file_date, file_time, period))
+    data.add_run(message)
+    document.save(file_name)
 
 
 def edit_data(date):
