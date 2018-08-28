@@ -97,39 +97,26 @@ def get_current_date():
     Return the current date in a dict format.
 
     :returns dict:
-               keys: "year" (int)
-                     "month" (int)
-                     "month_name" (str)
-                     "day" (int)
-                     "day_name" (str)
-                     "hour" (str)
-                     "minute" (str)
-                     "period" (str)
+             keys: (int) "year": The full year.
+                   (int) "month": The month number.
+                   (str) "month_name": The full month name.
+                   (int) "day": The day number of the month.
+                   (str) "day_name": The full name of the day.
+                   (int) "hour": The hour of the day.
+                   (int) "minute": The minute of the hour.
+                   (str) "period": The period being either AM or PM.
     """
-    date_and_time = str(datetime.datetime.now()).split(' ')
-    date = (date_and_time[0]).split('-')
-    time = (date_and_time[1]).split(':')
-    hour = int(time[0])
-
-    if hour > 12:
-        hour = str(hour - 12)
-        period = "PM"
-    else:
-        period = "AM"
-
-    full_time = datetime.datetime(int(date[0]), int(date[1]), int(date[2]))
-    day_name = full_time.date().strftime("%A")
-    month_name = full_time.date().strftime("%B")
+    date = datetime.datetime.now()
 
     return {
-        "year": int(date[0]),
-        "month": int(date[1]),
-        "month_name": month_name,
-        "day": int(date[2]),
-        "day_name": day_name,
-        "hour": hour,
-        "minute": time[1],
-        "period": period
+        "year": int(date.strftime("%Y")),
+        "month": int(date.strftime("%m")),
+        "month_name": date.strftime("%B"),
+        "day": int(date.strftime("%d")),
+        "day_name": date.strftime("%A"),
+        "hour": int(date.strftime("%I")),
+        "minute": int(date.strftime("%M")),
+        "period": date.strftime("%p")
     }
 
 
