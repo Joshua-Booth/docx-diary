@@ -12,7 +12,36 @@ To use this script you will need the following:
 ```
 Python 3.5+
 python-docx 0.8.6+
+setuptools-40.2.0+
 ```
+
+### Installing
+
+
+##### Install
+
+```
+C:\docx-diary> python -m setup.py install
+```
+
+### Usage
+
+##### Running the program
+
+To run the program, run the following command where "your_text_file.txt" is a file in the directory from where the command is called, any encrypted/decrypted files will also be placed here.
+
+**Example:**
+*New Entry*
+```
+C:\>python -m docx-diary.__main__ -n
+```
+
+
+**Other commands can be found with:** *Help*
+```
+C:\>python -m docx-diary.__main__ -h
+```
+
 
 ### Document formatting
 **Data filenames are in the following format:**
@@ -36,6 +65,16 @@ Monday January 1 2018
 Monday, January 1, 2018 7:30 PM
 Today is the first day of January!
 ```
+
+## Distribution
+
+To distribute this package, locate the directory containing [setup.py](setup.py) and run the following command:
+
+````
+C:\>python setup.py sdist
+````
+
+Note: Use the format flag ( --format) to select a different file format.
 
 ## Built With
 
