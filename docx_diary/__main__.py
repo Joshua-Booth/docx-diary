@@ -33,7 +33,7 @@ import argparse
 import docx
 from docx.shared import Pt
 
-logger.disabled = False
+logger.disabled = True
 
 
 def main():
