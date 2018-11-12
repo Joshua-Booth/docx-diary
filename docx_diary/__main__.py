@@ -38,8 +38,12 @@ logger.disabled = True
 
 def main():
     """ Start of the program. """
-    if not check_change_directory('diary'):
-        print("Checking current folder as no diary folder was found...")
+    if os.path.isdir('diary'):
+        os.chdir('diary')
+    else:
+        logger.warning("Directory 'diary' not found.")
+        print("Using current folder as no diary folder was found...\n")
+
     parser_description = "View, create and change data from a text file."
     parser = argparse.ArgumentParser(description=parser_description)
     group = parser.add_mutually_exclusive_group()
@@ -246,22 +250,6 @@ def edit_data(date):
         logger.error("File could not be found: {}".format(get_filename(date)))
         date = "{}/{}/{}".format(date['day'], date['month'], date['year'])
         print("There is no data you can edit for the date '{}'.".format(date))
-
-
-def check_change_directory(directory):
-    """
-    Checks if the directory can be changed to by trying to change the directory
-    to the given directory name.
-
-    :param str directory: The directory to check is valid.
-    :returns bool True | None:
-    """
-    try:
-        os.chdir(directory)
-        return True
-    except FileNotFoundError:
-        logger.error("Directory '{}' not found.".format(directory))
-        return False
 
 
 def check_file(data_file):
