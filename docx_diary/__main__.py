@@ -166,8 +166,12 @@ def view_data(date):
     """
     file_name = get_filename(date)
     try:
+        if not os.path.exists(file_name):
+            raise FileNotFoundError
         if check_file(file_name) is not False:
             data = get_data(file_name)
+        else:
+            raise Exception("Invalid file format of '{}'.".format(file_name))
         with open(file_name, 'r'):
             day_of_week = get_date_data(file_name)['day_of_week']
             month = get_date_data(file_name)['month']
