@@ -59,17 +59,17 @@ def main():
 
     # Create a new data entry for the current date and time
     if args.new:
-        file_name = "{} {} {} {}.docx".format(get_current_date()["day_name"],
-                                              get_current_date()["month_name"],
-                                              get_current_date()["day"],
-                                              get_current_date()["year"])
-        if is_file(file_name):
+        filename = "{} {} {} {}.docx".format(get_current_date()["day_name"],
+                                             get_current_date()["month_name"],
+                                             get_current_date()["day"],
+                                             get_current_date()["year"])
+        if is_file(filename):
             print("Do you want to overwrite your current message? (y/n)")
             overwrite = input(">> ")
             if overwrite.lower() == "y":
-                new_data()
+                new_data(filename)
         else:
-            new_data()
+            new_data(filename)
     # View data from a date
     elif args.date is not None:
         day, month, year = args.date
@@ -203,19 +203,17 @@ def view_data(date):
                                                                  date['year']))
 
 
-def new_data():
+def new_data(filename):
     """
     Create a new data entry for the current date and time.
 
+    :param str filename: The name of the file.
     :return None:
     """
     current_date = list(value for value in get_current_date().values())
     year, month, month_name, day, day_name, hour, minute, period = current_date
-    file_extension = "docx"
 
     file_time = "{0}:{1:02d}".format(hour, minute)
-    file_name = "{} {} {} {}.{}".format(day_name, month_name, day, year,
-                                        file_extension)
     file_date = "{}, {} {}, {}".format(day_name, month_name, day, year)
 
     # Default Style
@@ -233,7 +231,7 @@ def new_data():
     data.style = document.styles['Normal']
     date.add_run("{} {} {}".format(file_date, file_time, period))
     data.add_run(message)
-    document.save(file_name)
+    document.save(filename)
 
 
 def edit_data(date):
